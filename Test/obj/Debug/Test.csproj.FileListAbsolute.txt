@@ -1,0 +1,16 @@
+D:\Reaktor\Halvard\Dominion\Test\bin\Debug\Test.dll
+D:\Reaktor\Halvard\Dominion\Test\bin\Debug\Test.pdb
+D:\Reaktor\Halvard\Dominion\Test\bin\Debug\Contracts.dll
+D:\Reaktor\Halvard\Dominion\Test\bin\Debug\nunit.framework.dll
+D:\Reaktor\Halvard\Dominion\Test\bin\Debug\Repository.dll
+D:\Reaktor\Halvard\Dominion\Test\bin\Debug\Newtonsoft.Json.dll
+D:\Reaktor\Halvard\Dominion\Test\bin\Debug\Contracts.pdb
+D:\Reaktor\Halvard\Dominion\Test\bin\Debug\Repository.pdb
+D:\Reaktor\Halvard\Dominion\Test\bin\Debug\nunit.framework.xml
+D:\Reaktor\Halvard\Dominion\Test\bin\Debug\Newtonsoft.Json.xml
+D:\Reaktor\Halvard\Dominion\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+D:\Reaktor\Halvard\Dominion\Test\obj\Debug\Test.dll
+D:\Reaktor\Halvard\Dominion\Test\obj\Debug\Test.pdb
+D:\Reaktor\Halvard\Dominion\Test\bin\Debug\Test.dll.config
+D:\Reaktor\Halvard\Dominion\Test\bin\Debug\Logic.dll
+D:\Reaktor\Halvard\Dominion\Test\bin\Debug\Logic.pdb
