@@ -3,3 +3,7 @@ D:\Reaktor\Halvard\Dominion\Contracts\bin\Debug\Contracts.pdb
 D:\Reaktor\Halvard\Dominion\Contracts\obj\Debug\Contracts.csprojResolveAssemblyReference.cache
 D:\Reaktor\Halvard\Dominion\Contracts\obj\Debug\Contracts.dll
 D:\Reaktor\Halvard\Dominion\Contracts\obj\Debug\Contracts.pdb
+C:\Git\Dominion\Contracts\bin\Debug\Contracts.dll
+C:\Git\Dominion\Contracts\bin\Debug\Contracts.pdb
+C:\Git\Dominion\Contracts\obj\Debug\Contracts.dll
+C:\Git\Dominion\Contracts\obj\Debug\Contracts.pdb

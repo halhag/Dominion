@@ -5,3 +5,10 @@ D:\Reaktor\Halvard\Dominion\Logic\bin\Debug\Contracts.pdb
 D:\Reaktor\Halvard\Dominion\Logic\obj\Debug\Logic.csprojResolveAssemblyReference.cache
 D:\Reaktor\Halvard\Dominion\Logic\obj\Debug\Logic.dll
 D:\Reaktor\Halvard\Dominion\Logic\obj\Debug\Logic.pdb
+C:\Git\Dominion\Logic\bin\Debug\Logic.dll
+C:\Git\Dominion\Logic\bin\Debug\Logic.pdb
+C:\Git\Dominion\Logic\bin\Debug\Contracts.dll
+C:\Git\Dominion\Logic\bin\Debug\Contracts.pdb
+C:\Git\Dominion\Logic\obj\Debug\Logic.csprojResolveAssemblyReference.cache
+C:\Git\Dominion\Logic\obj\Debug\Logic.dll
+C:\Git\Dominion\Logic\obj\Debug\Logic.pdb

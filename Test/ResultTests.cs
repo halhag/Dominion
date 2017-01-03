@@ -1,30 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using Contracts;
-using NUnit.Framework;
 using Repository;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Test
 {
-    [TestFixture]
+    [TestClass]
     public class ResultTests
     {
-        [Test]
+        [TestMethod]
         public void CreateNewResult()
         {
             var guid = Guid.NewGuid();
             var result = new Contracts.Result
             {
-                Date = new DateTime(2011,10,11, 6,0,0),
+                Date = new DateTime(2011,10,11, 7,0,0),
                 Id = guid,
                 Name = "First Game",
                 Scores = new List<Score>
                 {
-                    new Score {Player = "Geir", Points = 12},
-                    new Score {Player = "Tore", Points = 19},
-                    new Score {Player = "Halvard", Points = 12},
-                    new Score {Player = "Fritjof", Points = 18},
-                    new Score {Player = "Arne", Points = 27},
+                    new Score {Player = "Geir", Points = 27},
+                    new Score {Player = "Tore", Points = 25},
+                    new Score {Player = "Halvard", Points = 24},
+                    new Score {Player = "Fritjof", Points = 27},
+                    new Score {Player = "Arne", Points = 21},
                 }
             };
 
