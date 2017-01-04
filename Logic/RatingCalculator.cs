@@ -48,11 +48,11 @@ namespace Logic
                     {
                         if (hasExperiencedPlayer)
                         {
-                            ratings.Add(new Rating { Player = score.Player, Number = 1800 });
+                            ratings.Add(new Rating { Player = score.Player, Number = 1700, Highest = 1700, Lowest = 1700 });
                         }
                         else
                         {
-                            ratings.Add(new Rating { Player = score.Player, Number = 1700 });
+                            ratings.Add(new Rating { Player = score.Player, Number = 1800, Highest = 1800, Lowest = 1800 });
                         }
                     }
                 }
@@ -72,19 +72,26 @@ namespace Logic
                 foreach (var score in result.Scores)
                 {
                     var existingRating = ratings.Single(x => x.Player == score.Player);
-                    double wins = 0, losses = 0, draws = 0;
+                    double wins = 0, losses = 0;
+                    int numberOfWins = 0, numberOfDraws = 0, numberOfLosses = 0;
                     foreach (var opponentScore in result.Scores.Where(x => x.Player != score.Player))
                     {
                         if (opponentScore.Points == score.Points)
                         {
                             wins += 0.5;
                             losses += 0.5;
-                            draws++;
+                            numberOfDraws++;
                         }
                         if (opponentScore.Points < score.Points)
+                        {
                             wins++;
+                            numberOfWins++;
+                        }
                         if (opponentScore.Points > score.Points)
+                        {
                             losses++;
+                            numberOfLosses++;
+                        }
                     }
                     var averageRatingOpponents = (gameRatings.Where(p => p.Player != score.Player).Sum(x => x.Number)) / numberOfOpponents;
                     var newRating = (existingRating.Number + 10 * (wins - losses - (averageRatingOpponents - existingRating.Number) / 400));
@@ -92,10 +99,13 @@ namespace Logic
                     {
                         Number = newRating,
                         Player = existingRating.Player,
-                        NumberOfRatedGames = existingRating.NumberOfRatedGames += numberOfOpponents,
-                        NumberOfDrawnGames = existingRating.NumberOfDrawnGames + (int)draws,
-                        NumberOfLostGames = existingRating.NumberOfLostGames + (int)losses,
-                        NumberOfWonGames = existingRating.NumberOfWonGames + (int) wins
+                        NumberOfRatedGames = existingRating.NumberOfRatedGames + numberOfOpponents,
+                        NumberOfDrawnGames = existingRating.NumberOfDrawnGames + numberOfDraws,
+                        NumberOfLostGames = existingRating.NumberOfLostGames + numberOfLosses,
+                        NumberOfWonGames = existingRating.NumberOfWonGames + numberOfWins,
+                        LastPlayed = result.Date,
+                        Highest = (newRating > existingRating.Number) ? newRating : existingRating.Number,
+                        Lowest = (newRating < existingRating.Number) ? newRating : existingRating.Number
                     });
                 }
                 foreach (var rating in tempRatings)
@@ -103,6 +113,12 @@ namespace Logic
                     var existingRating = ratings.Single(x => x.Player == rating.Player);
                     existingRating.Number = rating.Number;
                     existingRating.NumberOfRatedGames = rating.NumberOfRatedGames;
+                    existingRating.NumberOfDrawnGames = rating.NumberOfDrawnGames;
+                    existingRating.NumberOfLostGames = rating.NumberOfLostGames;
+                    existingRating.NumberOfWonGames = rating.NumberOfWonGames;
+                    existingRating.LastPlayed = rating.LastPlayed;
+                    existingRating.Highest = rating.Highest;
+                    existingRating.Lowest = rating.Lowest;
                 }
             }
             

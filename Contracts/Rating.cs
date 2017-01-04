@@ -11,5 +11,7 @@ namespace Contracts
         public int NumberOfLostGames { get; set; }
         public int NumberOfDrawnGames { get; set; }
         public int NumberOfWonGames { get; set; }
+        public double Highest { get; set; }
+        public double Lowest { get; set; }
     }
 }

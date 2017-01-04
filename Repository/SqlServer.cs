@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Data.Linq;
 using System.Linq;
 using Repository.Entities;
+using System;
 
 namespace Repository
 {
@@ -27,6 +28,16 @@ namespace Repository
         {
             var results = _dataContext.GetTable<Result>();
             return results.ToList();
+        }
+
+        public void DeleteResult(Guid guid)
+        {
+            var results = _dataContext.GetTable<Result>();
+            var result = results.SingleOrDefault(x => x.ResultId == guid);
+            if (result == null)
+                return;
+            results.DeleteOnSubmit(result);
+            _dataContext.SubmitChanges();
         }
     }
 }

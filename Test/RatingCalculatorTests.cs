@@ -4,16 +4,16 @@ using System.Linq;
 using Contracts;
 using Logic;
 using Newtonsoft.Json;
-using NUnit.Framework;
 using Repository;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Test
 {
-    [TestFixture]
+    [TestClass]
     public class RatingCalculatorTests
     {
         //[Ignore("Gets data from database and is therefore an integration test")]
-        [Test]
+        [TestMethod]
         public void FullCalculation()
         {
             var repository = new SqlServer();
@@ -24,7 +24,7 @@ namespace Test
             Assert.IsTrue(calculatedResults != null);
         }
 
-        [Test]
+        [TestMethod]
         public void NoGames()
         {
             var results = new List<Result>();
@@ -33,7 +33,7 @@ namespace Test
             Assert.IsTrue(calculatedResults.Count == 0);
         }
 
-        [Test]
+        [TestMethod]
         public void OneGame()
         {
             var results = new List<Result>();
@@ -55,7 +55,7 @@ namespace Test
             Assert.AreEqual(1790, calculatedResults[1].Number);
         }
 
-        [Test]
+        [TestMethod]
         public void MultipleGames()
         {
             var results = new List<Result>();
