@@ -29,6 +29,7 @@ namespace Logic
 
         public List<Rating> Calculate(List<Result> results)
         {
+            results = results.OrderBy(x => x.Date).ThenBy(x => x.GameNumber).ToList();
             var ratings = new List<Rating>();
             foreach (var result in results)
             {

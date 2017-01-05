@@ -32,17 +32,22 @@ namespace Test
             var guid = Guid.NewGuid();
             var result = new Contracts.Result
             {
-                Date = new DateTime(2011,10,23, 8,0,0),
                 Id = guid,
-                Name = "First Game",
+                Date = new DateTime(2011,12,30),
+                GameNumber = 2,
+                Name = "Interaction",
                 Scores = new List<Score>
                 {
-                    //new Score {Player = "Arne", Points = 16},
-                    new Score {Player = "Bjørn", Points = 31},
-                    new Score {Player = "Geir", Points = 21},
-                    new Score {Player = "Fritjof", Points = 21},
-                    new Score {Player = "Halvard", Points = 18},
-                    //new Score {Player = "Tore", Points = 15},
+                    //new Score {Player = "Arne", Points = 25},
+                    //new Score {Player = "Bjørn", Points = 14},
+                    new Score {Player = "Celina", Points = 21},
+                    //new Score {Player = "Geir", Points = 5},
+                    //new Score {Player = "Fritjof", Points = 42},
+                    new Score {Player = "Halvard", Points = 27},
+                    new Score {Player = "Ole Jonny", Points = 33},
+                    new Score {Player = "Rasmus", Points = 22},
+                    //new Score {Player = "Tore", Points = 29},
+                    new Score {Player = "Torill", Points = 27},
                 }
             };
 

@@ -96,6 +96,24 @@ namespace Test
                 Date = DateTime.Today.AddDays(0),
                 Id = Guid.NewGuid(),
                 Name = "First Game",
+                GameNumber = 2,
+                Scores = new List<Score>
+                {
+                    new Score {Player = "Halvard", Points = 40},
+                    new Score {Player = "Bjørn", Points = 39},
+                    new Score {Player = "Øyvind", Points = 29},
+                    new Score {Player = "Arne", Points = 30},
+                    new Score {Player = "Geir", Points = 32},
+                    new Score {Player = "Tore", Points = 34},
+                    new Score {Player = "Fritjof", Points = 42},
+                }
+            });
+            results.Add(new Result
+            {
+                Date = DateTime.Today.AddDays(0),
+                Id = Guid.NewGuid(),
+                Name = "First Game",
+                GameNumber = 1,
                 Scores = new List<Score>
                 {
                     new Score {Player = "Halvard", Points = 30},

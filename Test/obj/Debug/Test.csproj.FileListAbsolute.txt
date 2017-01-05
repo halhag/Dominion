@@ -31,3 +31,4 @@ C:\Git\Dominion\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
 C:\Git\Dominion\Test\obj\Debug\Test.dll
 C:\Git\Dominion\Test\obj\Debug\Test.pdb
 C:\Git\Dominion\Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\Reaktor\Halvard\Dominion\Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
