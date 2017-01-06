@@ -160,3 +160,5 @@ C:\Git\Dominion\Dominion\bin\System.Web.Http.Owin.xml
 C:\Git\Dominion\Dominion\obj\Debug\Dominion.csprojResolveAssemblyReference.cache
 C:\Git\Dominion\Dominion\obj\Debug\Dominion.dll
 C:\Git\Dominion\Dominion\obj\Debug\Dominion.pdb
+D:\Reaktor\Halvard\Dominion\Dominion\bin\log4net.dll
+D:\Reaktor\Halvard\Dominion\Dominion\bin\log4net.xml

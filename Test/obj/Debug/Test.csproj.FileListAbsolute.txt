@@ -32,3 +32,5 @@ C:\Git\Dominion\Test\obj\Debug\Test.dll
 C:\Git\Dominion\Test\obj\Debug\Test.pdb
 C:\Git\Dominion\Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 D:\Reaktor\Halvard\Dominion\Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\Reaktor\Halvard\Dominion\Test\bin\Debug\log4net.dll
+D:\Reaktor\Halvard\Dominion\Test\bin\Debug\log4net.xml

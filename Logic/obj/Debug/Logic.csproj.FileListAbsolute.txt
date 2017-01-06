@@ -12,3 +12,5 @@ C:\Git\Dominion\Logic\bin\Debug\Contracts.pdb
 C:\Git\Dominion\Logic\obj\Debug\Logic.csprojResolveAssemblyReference.cache
 C:\Git\Dominion\Logic\obj\Debug\Logic.dll
 C:\Git\Dominion\Logic\obj\Debug\Logic.pdb
+D:\Reaktor\Halvard\Dominion\Logic\bin\Debug\log4net.dll
+D:\Reaktor\Halvard\Dominion\Logic\bin\Debug\log4net.xml

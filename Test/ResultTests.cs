@@ -33,21 +33,29 @@ namespace Test
             var result = new Contracts.Result
             {
                 Id = guid,
-                Date = new DateTime(2011,12,30),
+                Date = new DateTime(2012,11,13),
                 GameNumber = 2,
-                Name = "Interaction",
+                Name = "Size Distortion",
                 Scores = new List<Score>
                 {
-                    //new Score {Player = "Arne", Points = 25},
-                    //new Score {Player = "Bjørn", Points = 14},
-                    new Score {Player = "Celina", Points = 21},
-                    //new Score {Player = "Geir", Points = 5},
-                    //new Score {Player = "Fritjof", Points = 42},
-                    new Score {Player = "Halvard", Points = 27},
-                    new Score {Player = "Ole Jonny", Points = 33},
-                    new Score {Player = "Rasmus", Points = 22},
-                    //new Score {Player = "Tore", Points = 29},
-                    new Score {Player = "Torill", Points = 27},
+                    //new Score {Player = "Anders", Points = 12},
+                    //new Score {Player = "Arne", Points = 24},
+                    //new Score {Player = "Bjørn", Points = 27},
+                    //new Score {Player = "Celina", Points = 27},
+                    //new Score {Player = "Christopher", Points = 18},
+                    //new Score {Player = "Geir", Points =22},
+                    //new Score {Player = "Fritjof", Points = 26},
+                    new Score {Player = "Halvard", Points = 48},
+                    //new Score {Player = "Jovanka", Points = 19},
+                    //new Score {Player = "Julia", Points = 44},
+                    //new Score {Player = "Monica", Points = 41},
+                    //new Score {Player = "Ole Jonny", Points = 33},
+                    //new Score {Player = "Rasmus", Points = 46},
+                    new Score {Player = "Ruben", Points = 26},
+                    //new Score {Player = "Stephanie", Points = 9},
+                    //new Score {Player = "Tore", Points = 34},
+                    //new Score {Player = "Torill", Points = 21},
+                    new Score {Player = "Øyvind", Points = 49},
                 }
             };
 

@@ -16,6 +16,8 @@ namespace Test
         [TestMethod]
         public void FullCalculation()
         {
+            log4net.Config.XmlConfigurator.Configure();
+
             var repository = new SqlServer();
             var allDbResults = repository.GetAllResults();
             var results = allDbResults.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();

@@ -1,11 +1,15 @@
-﻿using Contracts;
+﻿using System;
+using Contracts;
 using System.Collections.Generic;
 using System.Linq;
+using log4net;
 
 namespace Logic
 {
     public class RatingCalculator
     {
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(RatingCalculator));
+
         public Duel Calculate(string player, string opponent, List<Result> results)
         {
             var duel = new Duel { Player = player, Opponent = opponent };
@@ -33,15 +37,15 @@ namespace Logic
             var ratings = new List<Rating>();
             foreach (var result in results)
             {
+                Logger.Info("---------------------------------------------------------------------------------------------");
+                Logger.InfoFormat("GAME: Date = {0}, Number = {1}, Name = {2}", result.Date, result.GameNumber, result.Name);
+
                 bool hasExperiencedPlayer = false;
                 foreach (var score in result.Scores)
                 {
                     var existingRating = ratings.SingleOrDefault(r => r.Player == score.Player);
-                    if (existingRating != null)
-                    {
-                        if (existingRating.NumberOfRatedGames > 100)
-                            hasExperiencedPlayer = true;
-                    }
+                    if (existingRating?.NumberOfRatedGames > 100)
+                        hasExperiencedPlayer = true;
                 }
                 foreach (var score in result.Scores)
                 {
@@ -70,6 +74,8 @@ namespace Logic
                 }
                 var tempRatings = new List<Rating>();
                 var numberOfOpponents = result.Scores.Count - 1;
+                Logger.Debug("");
+                Logger.Debug("  Calculation:");
                 foreach (var score in result.Scores)
                 {
                     var existingRating = ratings.Single(x => x.Player == score.Player);
@@ -95,7 +101,8 @@ namespace Logic
                         }
                     }
                     var averageRatingOpponents = (gameRatings.Where(p => p.Player != score.Player).Sum(x => x.Number)) / numberOfOpponents;
-                    var newRating = (existingRating.Number + 10 * (wins - losses - (averageRatingOpponents - existingRating.Number) / 400));
+                    var newRating = (existingRating.Number + 10 * (wins - losses + ((averageRatingOpponents - existingRating.Number) / 400)));
+                    Logger.DebugFormat("    {0} : existing rating = {1}, wins = {2}, losses = {3}, average rating opponents = {4}, new rating = {5}", score.Player, existingRating.Number, wins, losses, averageRatingOpponents, newRating);
                     tempRatings.Add(new Rating
                     {
                         Number = newRating,
@@ -121,6 +128,22 @@ namespace Logic
                     existingRating.Highest = rating.Highest;
                     existingRating.Lowest = rating.Lowest;
                 }
+
+                
+                Logger.Debug("");
+                Logger.Debug("  Scores:");
+                foreach (var score in result.Scores)
+                {
+                    Logger.DebugFormat("    {0} : {1}", score.Player, score.Points);
+                }
+                Logger.Debug("");
+                Logger.Debug("  New ratings:");
+                foreach (var score in result.Scores)
+                {
+                    var rating = ratings.Single(x => x.Player == score.Player);
+                    Logger.DebugFormat("    {0} : {1}", rating.Player, Math.Round(rating.Number, 1));
+                }
+                Logger.Info("---------------------------------------------------------------------------------------------");
             }
             
             return ratings;
