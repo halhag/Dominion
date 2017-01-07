@@ -12,6 +12,19 @@ namespace Test
     [TestClass]
     public class RatingCalculatorTests
     {
+        [TestMethod]
+        public void Match()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+
+            var repository = new SqlServer();
+            var allDbResults = repository.GetAllResults();
+            var results = allDbResults.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();
+            var ratingCalculator = new RatingCalculator();
+            var duel = ratingCalculator.Calculate("Fritjof", "Geir", results);
+            Assert.IsNotNull(duel);
+        }
+
         //[Ignore("Gets data from database and is therefore an integration test")]
         [TestMethod]
         public void FullCalculation()

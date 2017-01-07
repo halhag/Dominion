@@ -40,25 +40,11 @@ namespace Logic
                 Logger.Info("---------------------------------------------------------------------------------------------");
                 Logger.InfoFormat("GAME: Date = {0}, Number = {1}, Name = {2}", result.Date, result.GameNumber, result.Name);
 
-                bool hasExperiencedPlayer = false;
-                foreach (var score in result.Scores)
-                {
-                    var existingRating = ratings.SingleOrDefault(r => r.Player == score.Player);
-                    if (existingRating?.NumberOfRatedGames > 100)
-                        hasExperiencedPlayer = true;
-                }
                 foreach (var score in result.Scores)
                 {
                     if (!ratings.Select(r => r.Player).Contains(score.Player))
                     {
-                        if (hasExperiencedPlayer)
-                        {
-                            ratings.Add(new Rating { Player = score.Player, Number = 1700, Highest = 1700, Lowest = 1700 });
-                        }
-                        else
-                        {
                             ratings.Add(new Rating { Player = score.Player, Number = 1800, Highest = 1800, Lowest = 1800 });
-                        }
                     }
                 }
 
@@ -101,8 +87,8 @@ namespace Logic
                         }
                     }
                     var averageRatingOpponents = (gameRatings.Where(p => p.Player != score.Player).Sum(x => x.Number)) / numberOfOpponents;
-                    var newRating = (existingRating.Number + 10 * (wins - losses + ((averageRatingOpponents - existingRating.Number) / 400)));
-                    Logger.DebugFormat("    {0} : existing rating = {1}, wins = {2}, losses = {3}, average rating opponents = {4}, new rating = {5}", score.Player, existingRating.Number, wins, losses, averageRatingOpponents, newRating);
+                    var newRating = (existingRating.Number + 10 * (wins - losses + (((averageRatingOpponents - existingRating.Number) * (result.Scores.Count - 1)) / 400)));
+                    Logger.DebugFormat("    {0} : existing rating = {1}, wins = {2}, losses = {3}, average rating opponents = {4}", score.Player, Math.Round(existingRating.Number, 1), wins, losses, Math.Round(averageRatingOpponents, 1));
                     tempRatings.Add(new Rating
                     {
                         Number = newRating,
@@ -112,8 +98,8 @@ namespace Logic
                         NumberOfLostGames = existingRating.NumberOfLostGames + numberOfLosses,
                         NumberOfWonGames = existingRating.NumberOfWonGames + numberOfWins,
                         LastPlayed = result.Date,
-                        Highest = (newRating > existingRating.Number) ? newRating : existingRating.Number,
-                        Lowest = (newRating < existingRating.Number) ? newRating : existingRating.Number
+                        Highest = (newRating > existingRating.Highest) ? newRating : existingRating.Highest,
+                        Lowest = (newRating < existingRating.Lowest) ? newRating : existingRating.Lowest
                     });
                 }
                 foreach (var rating in tempRatings)
