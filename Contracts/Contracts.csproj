@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Duel.cs" />
+    <Compile Include="MostPopularGames.cs" />
+    <Compile Include="PopularGame.cs" />
     <Compile Include="Rating.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="Score.cs" />

@@ -10,6 +10,27 @@ namespace Logic
     {
         private static readonly ILog Logger = LogManager.GetLogger(typeof(RatingCalculator));
 
+        public MostPopularGames GetMostPopularGames(List<Result> results)
+        {
+            var games = new List<PopularGame>();
+            foreach (var result in results)
+            {
+                var game = games.SingleOrDefault(x => x.Name == result.Name);
+                if (game == null)
+                {
+                    game = new PopularGame {Name = result.Name};
+                    games.Add(game);
+                }
+                game.NumberOfTimesPlayed++;
+                game.NumberOfPlayers += result.Scores.Count;
+            }
+            var orderedGames =
+                games.OrderByDescending(x => x.NumberOfTimesPlayed)
+                    .ThenByDescending(x => x.NumberOfPlayers).ToList();
+            var mostPopularGames = new MostPopularGames {Games = orderedGames};
+            return mostPopularGames;
+        }
+
         public Duel Calculate(string player, string opponent, List<Result> results)
         {
             var duel = new Duel { Player = player, Opponent = opponent };

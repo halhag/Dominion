@@ -36,7 +36,21 @@ namespace Test
             var results = allDbResults.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();
             var ratingCalculator = new RatingCalculator();
             var calculatedResults = ratingCalculator.Calculate(results);
-            Assert.IsTrue(calculatedResults != null);
+            var sortedResults = calculatedResults.OrderByDescending(x => x.Number).ToList();
+            Assert.IsTrue(sortedResults != null);
+        }
+
+        [TestMethod]
+        public void MostPlayedGames()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+
+            var repository = new SqlServer();
+            var allDbResults = repository.GetAllResults();
+            var results = allDbResults.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();
+            var ratingCalculator = new RatingCalculator();
+            var mostPlayedGames = ratingCalculator.GetMostPopularGames(results);
+            Assert.IsNotNull(mostPlayedGames);
         }
 
         [TestMethod]

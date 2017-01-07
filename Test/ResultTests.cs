@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Contracts;
 using Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 
 namespace Test
 {
@@ -23,6 +25,23 @@ namespace Test
         {
             var repository = new SqlServer();
             repository.DeleteResult(Guid.Parse("9dd7e2c3-e58a-4470-b61e-f8d1d72f7f92"));
+        }
+
+        [TestMethod]
+        [Ignore]
+        public void UpdateName()
+        {
+            var repository = new SqlServer();
+            var allDbResults = repository.GetAllResults();
+            var results = allDbResults.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();
+            foreach (var result in results)
+            {
+                if (result.Name == "Size Distortions")
+                {
+                    result.Name = "Size Distortion";
+                    repository.UpdateResult(result.Id, result.ToJson());
+                }
+            }
         }
 
         [TestMethod]

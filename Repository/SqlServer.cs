@@ -24,6 +24,14 @@ namespace Repository
             _dataContext.SubmitChanges();
         }
 
+        public void UpdateResult(Guid guid, string resultAsJson)
+        {
+            var results = _dataContext.GetTable<Result>();
+            var existingResult = results.Single(x => x.ResultId == guid);
+            existingResult.ResultAsJson = resultAsJson;
+            _dataContext.SubmitChanges();
+        }
+
         public List<Result> GetAllResults()
         {
             var results = _dataContext.GetTable<Result>();
