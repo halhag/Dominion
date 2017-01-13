@@ -32,6 +32,7 @@ namespace Test
         public void UpdateName()
         {
             var repository = new SqlServer();
+
             var allDbResults = repository.GetAllResults();
             var results = allDbResults.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();
             //foreach (var result in results)
