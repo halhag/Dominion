@@ -52,6 +52,12 @@ namespace Logic
             return duel;
         }
 
+        public List<Rating> Calculate(List<Result> results, DateTime from, DateTime to)
+        {
+            results = results.Where(x => x.Date > from && x.Date < to).ToList();
+            return Calculate(results);
+        }
+
         public List<Rating> Calculate(List<Result> results)
         {
             results = results.OrderBy(x => x.Date).ThenBy(x => x.GameNumber).ToList();
