@@ -4,6 +4,7 @@ namespace Dominion.Models
 {
     public class RatingModel
     {
+        public int Number { get; set; }
         public string Name { get; set; }
         public double Rating { get; set; }
         public string LastPlayed { get; set; }

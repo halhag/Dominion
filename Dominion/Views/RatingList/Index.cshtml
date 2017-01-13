@@ -15,19 +15,23 @@
 <div class="rating-table">
     <table id="ratingListTable" >
         <thead>
-            <tr>
-                <th>Player</th>
-                <th>Rating</th>
-                <th>Last played</th>
-                <th>Wins</th>
-                <th>Losses</th>
-                <th>Draws</th>
-            </tr>
+        <tr>
+            <th>#</th>
+            <th>Player</th>
+            <th>Rating</th>
+            <th>Last played</th>
+            <th>Wins</th>
+            <th>Losses</th>
+            <th>Draws</th>
+        </tr>
         </thead>
         <tbody>
             @foreach (var player in Model.RatingModels)
             {
                 <tr>
+                    <td>
+                        @player.Number
+                    </td>
                     <td>
                         @player.Name
                     </td>

@@ -20,12 +20,14 @@ namespace Dominion.Controllers
             var results = ratings.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();
             var calculator = new RatingCalculator();
             var calculatedRatings = calculator.Calculate(results);
-            var sortedResults = calculatedRatings.OrderByDescending(x => x.Number).ToList();
+            var sortedResults = calculatedRatings.Where(x => x.LastPlayed > DateTime.Today.AddDays(-90)).OrderByDescending(x => x.Number).ToList();
 
+            int position = 1;
             foreach (var sortedResult in sortedResults)
             {
                 var ratingModel = new RatingModel
                 {
+                    Number = position++,
                     Name = sortedResult.Player,
                     Rating = Math.Round(sortedResult.Number, 1),
                     LastPlayed = GetLastPlayed(sortedResult.LastPlayed),
