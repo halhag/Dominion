@@ -11,5 +11,7 @@ namespace Dominion.Models
         public int Wins { get; set; }
         public int Losses { get; set; }
         public int Draws { get; set; }
+        public double HighestRating { get; set; }
+        public double LowestRating { get; set; }
     }
 }

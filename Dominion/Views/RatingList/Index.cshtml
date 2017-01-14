@@ -20,9 +20,14 @@
             <th>Player</th>
             <th>Rating</th>
             <th>Last played</th>
-            <th>Wins</th>
-            <th>Losses</th>
-            <th>Draws</th>
+            @if (!@Request.Browser.IsMobileDevice)
+            {
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Draws</th>
+                <th>Highest</th>
+                <th>Lowest</th>
+            }
         </tr>
         </thead>
         <tbody>
@@ -41,15 +46,24 @@
                     <td>
                         @player.LastPlayed
                     </td>
-                    <td>
-                        @player.Wins
-                    </td>
-                    <td>
-                        @player.Losses
-                    </td>
-                    <td>
-                        @player.Draws
-                    </td>
+                    @if (!@Request.Browser.IsMobileDevice)
+                    {
+                        <td>
+                            @player.Wins
+                        </td>
+                        <td>
+                            @player.Losses
+                        </td>
+                        <td>
+                            @player.Draws
+                        </td>
+                        <td>
+                            @player.HighestRating
+                        </td>
+                        <td>
+                            @player.LowestRating
+                        </td>
+                    }
                 </tr>
             }
         </tbody>

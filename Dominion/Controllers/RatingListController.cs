@@ -33,7 +33,9 @@ namespace Dominion.Controllers
                     LastPlayed = GetLastPlayed(sortedResult.LastPlayed),
                     Wins = sortedResult.NumberOfWonGames,
                     Draws = sortedResult.NumberOfDrawnGames,
-                    Losses = sortedResult.NumberOfLostGames
+                    Losses = sortedResult.NumberOfLostGames,
+                    HighestRating = Math.Round(sortedResult.Highest, 1),
+                    LowestRating = Math.Round(sortedResult.Lowest, 1),
                 };
                 ratingListModel.RatingModels.Add(ratingModel);
             }
