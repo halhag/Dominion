@@ -19,7 +19,8 @@
             <th>#</th>
             <th>Player</th>
             <th>Rating</th>
-            <th>Last played</th>
+            <th data-dynatable-sorts="LastPlayedValue">Last played</th>
+            <th style="display: none">LastPlayedValue</th>
             @if (!@Request.Browser.IsMobileDevice)
             {
                 <th>Wins</th>
@@ -46,6 +47,9 @@
                     <td>
                         @player.LastPlayed
                     </td>
+                    <td>
+                        @player.LastPlayedValue
+                    </td>
                     @if (!@Request.Browser.IsMobileDevice)
                     {
                         <td>
@@ -69,3 +73,35 @@
         </tbody>
     </table>
 
+    @section scripts
+    {
+        <script>
+                $(document).ready(function () {
+                    $('#ratingListTable').dynatable({
+                        table: {
+                            defaultColumnIdStyle: 'trimDash'
+                        },
+                        features: {
+                            paginate: false,
+                            search: true,
+                            recordCount: false,
+                            perPageSelect: false
+                        },
+                        readers: {
+                                'Losses': function (el, record) {
+                                return Number(el.innerHTML);
+                            },
+                                'Wins': function (el, record) {
+                                return Number(el.innerHTML);
+                            },
+                                'Draws': function (el, record) {
+                                return Number(el.innerHTML);
+                            },
+                                '#': function (el, record) {
+                                return Number(el.innerHTML);
+                            },
+                        },
+                    });
+                });
+        </script>
+    }

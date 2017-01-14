@@ -31,6 +31,7 @@ namespace Dominion.Controllers
                     Name = sortedResult.Player,
                     Rating = Math.Round(sortedResult.Number, 1),
                     LastPlayed = GetLastPlayed(sortedResult.LastPlayed),
+                    LastPlayedValue = sortedResult.LastPlayed.ToString("yyyyMMdd"),
                     Wins = sortedResult.NumberOfWonGames,
                     Draws = sortedResult.NumberOfDrawnGames,
                     Losses = sortedResult.NumberOfLostGames,
