@@ -21,7 +21,7 @@ namespace Test
             var allDbResults = repository.GetAllResults();
             var results = allDbResults.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();
             var ratingCalculator = new RatingCalculator();
-            var duel = ratingCalculator.Calculate("Fritjof", "Geir", results);
+            var duel = ratingCalculator.Calculate("Bjørn", "Geir", results);
             Assert.IsNotNull(duel);
         }
 
@@ -38,6 +38,8 @@ namespace Test
             var calculatedResults = ratingCalculator.Calculate(results);
             var sortedResults = calculatedResults.OrderByDescending(x => x.Number).ToList();
             Assert.IsTrue(sortedResults != null);
+            var activeResults = sortedResults.Where(x => x.LastPlayed > new DateTime(2015, 8, 29)).ToList();
+            Assert.IsTrue(activeResults != null);
         }
 
         [TestMethod]
