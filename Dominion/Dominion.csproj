@@ -493,6 +493,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\RatingList\Index.cshtml" />
     <Content Include="Views\Duel\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutNew.cshtml" />
+    <Content Include="Views\Shared\_SiteLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
