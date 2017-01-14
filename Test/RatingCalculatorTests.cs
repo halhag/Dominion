@@ -21,7 +21,7 @@ namespace Test
             var allDbResults = repository.GetAllResults();
             var results = allDbResults.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();
             var ratingCalculator = new RatingCalculator();
-            var duel = ratingCalculator.Calculate("Bjørn", "Geir", results);
+            var duel = ratingCalculator.Calculate("Fritjof", "Geir", results);
             Assert.IsNotNull(duel);
         }
 
@@ -36,6 +36,22 @@ namespace Test
             var results = allDbResults.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();
             var ratingCalculator = new RatingCalculator();
             var calculatedResults = ratingCalculator.Calculate(results);
+            var sortedResults = calculatedResults.OrderByDescending(x => x.Number).ToList();
+            //var activePlayersResult = sortedResults.Where(x => x.LastPlayed > new DateTime(2014,4,1)).ToList();
+            Assert.IsTrue(sortedResults != null);
+        }
+
+        //[Ignore("Gets data from database and is therefore an integration test")]
+        [TestMethod]
+        public void FullCalculationDateRange()
+        {
+            log4net.Config.XmlConfigurator.Configure();
+
+            var repository = new SqlServer();
+            var allDbResults = repository.GetAllResults();
+            var results = allDbResults.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();
+            var ratingCalculator = new RatingCalculator();
+            var calculatedResults = ratingCalculator.Calculate(results, new DateTime(2011,1,1), new DateTime(2018,1,1));
             var sortedResults = calculatedResults.OrderByDescending(x => x.Number).ToList();
             Assert.IsTrue(sortedResults != null);
             var activeResults = sortedResults.Where(x => x.LastPlayed > new DateTime(2015, 8, 29)).ToList();
