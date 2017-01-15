@@ -4,6 +4,11 @@ namespace Contracts
 {
     public class Rating
     {
+        public Rating()
+        {
+            Trend = new Trend();
+        }
+
         public string Player { get; set; }
         public int NumberOfRatedGames { get; set; }
         public double Number { get; set; }
@@ -13,5 +18,6 @@ namespace Contracts
         public int NumberOfWonGames { get; set; }
         public double Highest { get; set; }
         public double Lowest { get; set; }
+        public Trend Trend { get; set; }
     }
 }

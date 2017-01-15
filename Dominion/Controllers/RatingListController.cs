@@ -77,6 +77,7 @@ namespace Dominion.Controllers
                     Losses = sortedResult.NumberOfLostGames,
                     HighestRating = Math.Round(sortedResult.Highest, 1),
                     LowestRating = Math.Round(sortedResult.Lowest, 1),
+                    Trend = sortedResult.Trend.GetEndring()
                 };
                 ratingListModel.RatingModels.Add(ratingModel);
             }

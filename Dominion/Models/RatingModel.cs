@@ -12,5 +12,6 @@
         public int Draws { get; set; }
         public double HighestRating { get; set; }
         public double LowestRating { get; set; }
+        public string Trend { get; set; }
     }
 }

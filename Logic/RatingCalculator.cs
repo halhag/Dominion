@@ -116,7 +116,7 @@ namespace Logic
                     var averageRatingOpponents = (gameRatings.Where(p => p.Player != score.Player).Sum(x => x.Number)) / numberOfOpponents;
                     var newRating = (existingRating.Number + 10 * (wins - losses + (((averageRatingOpponents - existingRating.Number) * (result.Scores.Count - 1)) / 400)));
                     Logger.DebugFormat("    {0} : existing rating = {1}, wins = {2}, losses = {3}, average rating opponents = {4}", score.Player, Math.Round(existingRating.Number, 1), wins, losses, Math.Round(averageRatingOpponents, 1));
-                    tempRatings.Add(new Rating
+                    var tempRating = new Rating
                     {
                         Number = newRating,
                         Player = existingRating.Player,
@@ -126,8 +126,11 @@ namespace Logic
                         NumberOfWonGames = existingRating.NumberOfWonGames + numberOfWins,
                         LastPlayed = result.Date,
                         Highest = (newRating > existingRating.Highest) ? newRating : existingRating.Highest,
-                        Lowest = (newRating < existingRating.Lowest) ? newRating : existingRating.Lowest
-                    });
+                        Lowest = (newRating < existingRating.Lowest) ? newRating : existingRating.Lowest,
+                        Trend = existingRating.Trend
+                    };
+                    tempRating.Trend.Add(existingRating.Number, newRating);
+                    tempRatings.Add(tempRating);
                 }
                 foreach (var rating in tempRatings)
                 {
@@ -140,8 +143,8 @@ namespace Logic
                     existingRating.LastPlayed = rating.LastPlayed;
                     existingRating.Highest = rating.Highest;
                     existingRating.Lowest = rating.Lowest;
+                    existingRating.Trend = existingRating.Trend;
                 }
-
                 
                 Logger.Debug("");
                 Logger.Debug("  Scores:");
