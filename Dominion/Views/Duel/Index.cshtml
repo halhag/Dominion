@@ -1,0 +1,58 @@
+﻿@model Dominion.Models.DuelModel
+@{
+    ViewBag.Title = "Duel";
+    Layout = "../Shared/_SiteLayout.cshtml";
+}
+<div class="heading side-head">
+    <div class="head-6">
+        <h4><i class="fa fa-bar-chart"></i><span class="main-color">Duel</span></h4>
+    </div>
+</div>
+@using (Html.BeginForm("Shoot", "Duel"))
+{
+    @*@Html.HiddenFor(m => m.CorrectAnswers, @Model.CorrectAnswers)
+    @Html.HiddenFor(m => m.QuestionNumber, @Model.QuestionNumber)
+    @Html.HiddenFor(m => m.QuizId, @Model.QuizId)
+    @Html.Raw(@Model.Text)
+    <br />
+    <br />
+
+    foreach (var alternative in @Model.Alternatives)
+    {
+        @Html.RadioButton("Answer", @alternative.Text)
+        @alternative.Text
+        <br />
+    }
+    <br />*@
+   // @Html.HiddenFor(m => m.SelectedFirst, @Model.SelectedFirst)
+   // @Html.HiddenFor(m => m.SelectedSecond, @Model.SelectedSecond)
+    if (@Model.ErrorMessage != null)
+    {
+        <p><b>@Model.ErrorMessage</b></p>
+        <br />
+    }
+    if (@Model.MessageFirstShooter != null)
+    {
+        <span><b>@Model.MessageFirstShooter</b></span>
+        <br />
+        <span><b>@Model.MessageSecondShooter</b></span>
+        <br />
+        <span><b>@Model.MessageDraws</b></span>
+        <br />
+        <br />
+    }
+    @Html.DropDownListFor(model => model.SelectedFirst, Model.PlayersFirst, "-- Select Duelist --")
+    <br />
+    <br />
+    @Html.DropDownListFor(model => model.SelectedSecond, Model.PlayersSecond, "-- Select Duelist --")
+    <br />
+    <br />
+    <input type="submit" value="Shoot" class="btn main-bg" />
+    <br />
+    <br />
+    <p>If both players have played in the same game, if one player has more points than the other then that counts as a win.</p>
+}
+
+
+
+

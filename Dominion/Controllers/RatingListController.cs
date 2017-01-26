@@ -5,22 +5,62 @@ using Dominion.Models;
 using Logic;
 using Newtonsoft.Json;
 using Repository;
+using System.Collections.Generic;
 
 namespace Dominion.Controllers
 {
     public class RatingListController : Controller
     {
         // GET: RatingList
-        public ActionResult Index()
+        public ActionResult Index(RatingListModel ratingListModel)
         {
-            var ratingListModel = new RatingListModel();
-
             var repository = new SqlServer();
             var ratings = repository.GetAllResults();
             var results = ratings.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();
             var calculator = new RatingCalculator();
-            var calculatedRatings = calculator.Calculate(results);
-            var sortedResults = calculatedRatings.Where(x => x.LastPlayed > DateTime.Today.AddDays(-90)).OrderByDescending(x => x.Number).ToList();
+
+            var calculatedRatings = new List<Contracts.Rating>();
+            var sortedResults = new List<Contracts.Rating>();
+            if (string.IsNullOrEmpty(ratingListModel.YearsSelected) || ratingListModel.YearsSelected == "ALL" )
+            {
+                calculatedRatings = calculator.Calculate(results);
+                sortedResults = calculatedRatings.Where(x => x.LastPlayed > DateTime.Today.AddDays(-90)).OrderByDescending(x => x.Number).ToList();
+            }
+            else if (ratingListModel.YearsSelected == "2011")
+            {
+                calculatedRatings = calculator.Calculate(results, new DateTime(2011, 1, 1), new DateTime(2012, 1, 1));
+                sortedResults = calculatedRatings.OrderByDescending(x => x.Number).ToList();
+            }
+            else if (ratingListModel.YearsSelected == "2012")
+            {
+                calculatedRatings = calculator.Calculate(results, new DateTime(2012, 1, 1), new DateTime(2013, 1, 1));
+                sortedResults = calculatedRatings.OrderByDescending(x => x.Number).ToList();
+            }
+            else if (ratingListModel.YearsSelected == "2013")
+            {
+                calculatedRatings = calculator.Calculate(results, new DateTime(2013, 1, 1), new DateTime(2014, 1, 1));
+                sortedResults = calculatedRatings.OrderByDescending(x => x.Number).ToList();
+            }
+            else if (ratingListModel.YearsSelected == "2014")
+            {
+                calculatedRatings = calculator.Calculate(results, new DateTime(2014, 1, 1), new DateTime(2015, 1, 1));
+                sortedResults = calculatedRatings.OrderByDescending(x => x.Number).ToList();
+            }
+            else if (ratingListModel.YearsSelected == "2015")
+            {
+                calculatedRatings = calculator.Calculate(results, new DateTime(2015, 1, 1), new DateTime(2016, 1, 1));
+                sortedResults = calculatedRatings.OrderByDescending(x => x.Number).ToList();
+            }
+            else if (ratingListModel.YearsSelected == "2016")
+            {
+                calculatedRatings = calculator.Calculate(results, new DateTime(2016, 1, 1), new DateTime(2017, 1, 1));
+                sortedResults = calculatedRatings.OrderByDescending(x => x.Number).ToList();
+            }
+            else if (ratingListModel.YearsSelected == "2017")
+            {
+                calculatedRatings = calculator.Calculate(results, new DateTime(2017, 1, 1), new DateTime(2018, 1, 1));
+                sortedResults = calculatedRatings.OrderByDescending(x => x.Number).ToList();
+            }
 
             int position = 1;
             foreach (var sortedResult in sortedResults)
@@ -31,14 +71,31 @@ namespace Dominion.Controllers
                     Name = sortedResult.Player,
                     Rating = Math.Round(sortedResult.Number, 1),
                     LastPlayed = GetLastPlayed(sortedResult.LastPlayed),
+                    LastPlayedValue = sortedResult.LastPlayed.ToString("yyyyMMdd"),
                     Wins = sortedResult.NumberOfWonGames,
                     Draws = sortedResult.NumberOfDrawnGames,
-                    Losses = sortedResult.NumberOfLostGames
+                    Losses = sortedResult.NumberOfLostGames,
+                    HighestRating = Math.Round(sortedResult.Highest, 1),
+                    LowestRating = Math.Round(sortedResult.Lowest, 1),
+                    Trend = sortedResult.Trend.GetEndring()
                 };
                 ratingListModel.RatingModels.Add(ratingModel);
             }
+            ratingListModel.Years.Add(new SelectListItem { Text = "All years", Value = "ALL" });
+            ratingListModel.Years.Add(new SelectListItem { Text = "2011", Value = "2011" });
+            ratingListModel.Years.Add(new SelectListItem { Text = "2012", Value = "2012" });
+            ratingListModel.Years.Add(new SelectListItem { Text = "2013", Value = "2013" });
+            ratingListModel.Years.Add(new SelectListItem { Text = "2014", Value = "2014" });
+            ratingListModel.Years.Add(new SelectListItem { Text = "2015", Value = "2015" });
+            ratingListModel.Years.Add(new SelectListItem { Text = "2016", Value = "2016" });
+            ratingListModel.Years.Add(new SelectListItem { Text = "2017", Value = "2017" });
 
             return View(ratingListModel);
+        }
+
+        public ActionResult Recalculate(RatingListModel model)
+        {
+            return RedirectToAction("Index", model);
         }
 
         private string GetLastPlayed(DateTime dateTime)

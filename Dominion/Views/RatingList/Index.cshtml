@@ -1,57 +1,127 @@
 ﻿@model Dominion.Models.RatingListModel
-
-<style>
-    td { 
-        padding: 10px;
-    }
-</style>
-
+@*<style>
+        td {
+            padding: 10px;
+        }
+    </style>*@
 @{
     ViewBag.Title = "Rating list";
+    Layout = "../Shared/_SiteLayout.cshtml";
 }
-
-<h2>Rating list</h2>
-
-<div class="rating-table">
-    <table id="ratingListTable" >
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Player</th>
-            <th>Rating</th>
-            <th>Last played</th>
-            <th>Wins</th>
-            <th>Losses</th>
-            <th>Draws</th>
-        </tr>
-        </thead>
-        <tbody>
-            @foreach (var player in Model.RatingModels)
-            {
+<div class="heading side-head">
+    <div class="head-6">
+        <h4><i class="fa fa-bar-chart"></i><span class="main-color">Rating list</span></h4>
+    </div>
+</div>
+<div>
+    @using (Html.BeginForm("Recalculate", "RatingList"))
+    {
+        @Html.DropDownListFor(model => model.YearsSelected, Model.Years)
+        <br/>
+        <br/>
+        <input type="submit" value="Recalculate" class="btn main-bg" />
+        <br />
+        <br/>
+        <p>Rating is calculated each time, with all players starting on 1800 and with a K-factor of 10.  Picking a single year will calculate the ratings for all players who played that year, for just that year.  Picking all years will calculate ratings for all players since the beginning of time, but only show those that have played a game within the last three months.</p>
+    }
+</div>
+<div class="col-md-12 table table-responsive">
+    <div class="rating-table">
+        <table id="ratingListTable">
+            <thead>
                 <tr>
-                    <td>
-                        @player.Number
-                    </td>
-                    <td>
-                        @player.Name
-                    </td>
-                    <td>
-                        @player.Rating
-                    </td>
-                    <td>
-                        @player.LastPlayed
-                    </td>
-                    <td>
-                        @player.Wins
-                    </td>
-                    <td>
-                        @player.Losses
-                    </td>
-                    <td>
-                        @player.Draws
-                    </td>
+                    <th>#</th>
+                    <th>Player</th>
+                    <th>Rating</th>
+                    <th data-dynatable-sorts="LastPlayedValue">Last played</th>
+                    <th style="display: none">LastPlayedValue</th>
+                    @if (!@Request.Browser.IsMobileDevice)
+            {
+                        <th>Wins</th>
+                        <th>Losses</th>
+                        <th>Draws</th>
+                        <th>Highest</th>
+                        <th>Lowest</th>
+                        <th>Trend</th>
+                    }
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var player in Model.RatingModels)
+            {
+                    <tr>
+                        <td>
+                            @player.Number
+                        </td>
+                        <td>
+                            @player.Name
+                        </td>
+                        <td>
+                            @player.Rating
+                        </td>
+                        <td>
+                            @player.LastPlayed
+                        </td>
+                        <td>
+                            @player.LastPlayedValue
+                        </td>
+                        @if (!@Request.Browser.IsMobileDevice)
+                        {
+                            <td>
+                                @player.Wins
+                            </td>
+                            <td>
+                                @player.Losses
+                            </td>
+                            <td>
+                                @player.Draws
+                            </td>
+                            <td>
+                                @player.HighestRating
+                            </td>
+                            <td>
+                                @player.LowestRating
+                            </td>
+                            <td>
+                                @player.Trend
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
 
+        @section scripts
+        {
+            <script>
+                $(document).ready(function () {
+                    $('#ratingListTable').dynatable({
+                        table: {
+                            defaultColumnIdStyle: 'trimDash'
+                        },
+                        features: {
+                            paginate: false,
+                            search: true,
+                            recordCount: false,
+                            perPageSelect: false
+                        },
+                        readers: {
+                            'Losses': function (el, record) {
+                                return Number(el.innerHTML);
+                            },
+                            'Wins': function (el, record) {
+                                return Number(el.innerHTML);
+                            },
+                            'Draws': function (el, record) {
+                                return Number(el.innerHTML);
+                            },
+                            '#': function (el, record) {
+                                return Number(el.innerHTML);
+                            },
+                        },
+                    });
+                });
+            </script>
+        }
+    </div>
+</div>
