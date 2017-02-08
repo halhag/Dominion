@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Contracts;
+using Logic;
 using Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
@@ -25,6 +26,21 @@ namespace Test
         {
             var repository = new SqlServer();
             repository.DeleteResult(Guid.Parse("9dd7e2c3-e58a-4470-b61e-f8d1d72f7f92"));
+        }
+
+        [TestMethod]
+        //[Ignore]
+        public void UpdateGameType()
+        {
+            var repository = new SqlServer();
+
+            var allDbResults = repository.GetAllResults();
+            var results = allDbResults.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();
+            foreach (var result in results)
+            {
+                result.GameType = GameType.Dominion;
+                repository.UpdateResult(result.Id, result.ToJson());
+            }
         }
 
         [TestMethod]
@@ -70,6 +86,7 @@ namespace Test
             var guid = Guid.NewGuid();
             var result = new Contracts.Result
             {
+                GameType = GameType.Dominion,
                 Id = guid,
                 Date = new DateTime(2014,6,24),
                 GameNumber = 5,

@@ -5,6 +5,7 @@ namespace Contracts
 {
     public class Result
     {
+        public string GameType { get; set; }
         public Guid Id { get; set; }
         public string Name { get; set; }
         public List<Score> Scores { get; set; }

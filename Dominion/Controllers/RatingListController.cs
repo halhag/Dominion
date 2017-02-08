@@ -17,6 +17,7 @@ namespace Dominion.Controllers
             var repository = new SqlServer();
             var ratings = repository.GetAllResults();
             var results = ratings.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();
+            results = results.Where(x => x.GameType == GameType.Dominion).ToList();
             var calculator = new RatingCalculator();
 
             var calculatedRatings = new List<Contracts.Rating>();

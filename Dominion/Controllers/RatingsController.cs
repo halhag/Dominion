@@ -2,20 +2,37 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Logic;
 using Newtonsoft.Json;
 using Repository;
 
 namespace Dominion.Controllers
 {
+    [RoutePrefix("api/ratings")]
     public class RatingsController : ApiController
     {
+        [HttpGet]
+        [AcceptVerbs("GET")]
+        public string Get()
+        {
+            return "Angi gameType for å få svar!";
+        }
+
         // GET api/values
-        public IEnumerable<Contracts.Result> Get()
+        [HttpGet]
+        [AcceptVerbs("GET")]
+        [Route("{gameType}")]
+        public IEnumerable<Contracts.Rating> Get(string gameType)
         {
             var repository = new SqlServer();
             var allDbResults = repository.GetAllResults();
-            return allDbResults.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();
+            var results = allDbResults.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();
+            results = results.Where(x => x.GameType == gameType).ToList();
+            var calculator = new RatingCalculator();
+            var ratings = calculator.Calculate(results);
+            return ratings;
         }
+        
 
         // POST api/values
         public void Post([FromBody]Contracts.Result result)

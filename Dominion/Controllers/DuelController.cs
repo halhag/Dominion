@@ -18,6 +18,7 @@ namespace Dominion.Controllers
             var repository = new SqlServer();
             var ratings = repository.GetAllResults();
             var results = ratings.Select(dbResult => JsonConvert.DeserializeObject<Contracts.Result>(dbResult.ResultAsJson)).ToList();
+            results = results.Where(x => x.GameType == GameType.Dominion).ToList();
             var calculator = new RatingCalculator();
             var calculatedRatings = calculator.Calculate(results);
             var sortedResults = calculatedRatings.Where(x => x.LastPlayed > DateTime.Today.AddDays(-90)).OrderBy(x => x.Player).ToList();
