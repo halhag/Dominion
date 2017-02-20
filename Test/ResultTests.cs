@@ -80,7 +80,7 @@ namespace Test
         }
 
         [TestMethod]
-        [Ignore]
+        //[Ignore]
         public void CreateNewResult()
         {
             var guid = Guid.NewGuid();
@@ -88,9 +88,9 @@ namespace Test
             {
                 GameType = GameType.Dominion,
                 Id = guid,
-                Date = new DateTime(2017,2,15),
-                GameNumber = 1,
-                Name = "",
+                Date = new DateTime(2017,2,18),
+                GameNumber = 3,
+                Name = "Collectors",
                 Scores = new List<Score>
                 {
                     //new Score {Player = "Anders", Points = 9},
@@ -99,14 +99,15 @@ namespace Test
                     //new Score {Player = "Arash", Points = 12},
                     //new Score {Player = "Arne", Points = 17},
                     //new Score {Player = "Arne J", Points = 20},
-                    //new Score {Player = "Bjørn", Points = 15},
-                    //new Score {Player = "Celina", Points = 26},
+                    //new Score {Player = "Astrid", Points = 54},
+                    //new Score {Player = "Bjørn", Points = 55},
+                    new Score {Player = "Celina", Points = 53},
                     //new Score {Player = "Christopher", Points = 18},
                     //new Score {Player = "Dinesh", Points = 15},
                     //new Score {Player = "Endre", Points = 21},
                     //new Score {Player = "Geir", Points = 30},
                     //new Score {Player = "Fritjof", Points = 36},
-                    //new Score {Player = "Halvard", Points = 30},
+                    new Score {Player = "Halvard", Points = 69},
                     //new Score {Player = "Heather", Points = 1},
                     //new Score {Player = "Håvard", Points = 37},
                     //new Score {Player = "Jakob", Points = 1},
@@ -120,15 +121,15 @@ namespace Test
                     //new Score {Player = "Miriam", Points = 7},
                     //new Score {Player = "Monica", Points = 41},
                     //new Score {Player = "Mick", Points = 25},
-                    new Score {Player = "Nikolaj", Points = 40},
+                    //new Score {Player = "Nikolaj", Points = 40},
                     //new Score {Player = "Nina", Points = 14},
                     //new Score {Player = "Ole Jonny", Points = 9},
-                    new Score {Player = "Rasmus", Points = 32},
+                    new Score {Player = "Rasmus", Points = 40},
                     //new Score {Player = "Ruben", Points = 30},
                     //new Score {Player = "Stephanie", Points = 15},
                     //new Score {Player = "Sverre", Points = 17},
                     //new Score {Player = "Tore", Points = 33},
-                    new Score {Player = "Torill", Points = 17},
+                    new Score {Player = "Torill", Points = 39},
                     //new Score {Player = "Ørjan", Points = 6},
                     //new Score {Player = "Øyvind", Points = 43},
                     //new Score {Player = "Åse", Points = 13},
