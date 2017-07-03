@@ -26,6 +26,7 @@ namespace Dominion.Controllers
             {
                 calculatedRatings = calculator.Calculate(results);
                 sortedResults = calculatedRatings.Where(x => x.LastPlayed > DateTime.Today.AddDays(-90)).OrderByDescending(x => x.Number).ToList();
+                sortedResults.AddRange(calculatedRatings.Where(x => x.LastPlayed <= DateTime.Today.AddDays(-90)).OrderByDescending(x => x.Number).ToList());
             }
             else if (ratingListModel.YearsSelected == "2011")
             {

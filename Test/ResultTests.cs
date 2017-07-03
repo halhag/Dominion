@@ -29,7 +29,7 @@ namespace Test
         }
 
         [TestMethod]
-        //[Ignore]
+        [Ignore]
         public void UpdateGameType()
         {
             var repository = new SqlServer();
@@ -80,7 +80,7 @@ namespace Test
         }
 
         [TestMethod]
-        //[Ignore]
+        [Ignore]
         public void CreateNewResult()
         {
             var guid = Guid.NewGuid();
@@ -88,29 +88,31 @@ namespace Test
             {
                 GameType = GameType.Dominion,
                 Id = guid,
-                Date = new DateTime(2017,2,18),
-                GameNumber = 3,
-                Name = "Collectors",
+                Date = new DateTime(2017,6,27),
+                GameNumber = 4,
+                Name = "KotW 4/9",
                 Scores = new List<Score>
                 {
                     //new Score {Player = "Anders", Points = 9},
                     //new Score {Player = "Anders X", Points = 33},
                     //new Score {Player = "Anna", Points = 2},
-                    //new Score {Player = "Arash", Points = 12},
-                    //new Score {Player = "Arne", Points = 17},
+                    //new Score {Player = "Arash", Points = -1},
+                    new Score {Player = "Arne", Points = 18},
                     //new Score {Player = "Arne J", Points = 20},
                     //new Score {Player = "Astrid", Points = 54},
-                    //new Score {Player = "Bjørn", Points = 55},
-                    new Score {Player = "Celina", Points = 53},
+                    //new Score {Player = "Bjørn", Points = 30},
+                    //new Score {Player = "Celina", Points = 53},
+                    //new Score {Player = "Chris", Points = 42},
                     //new Score {Player = "Christopher", Points = 18},
-                    //new Score {Player = "Dinesh", Points = 15},
-                    //new Score {Player = "Endre", Points = 21},
-                    //new Score {Player = "Geir", Points = 30},
-                    //new Score {Player = "Fritjof", Points = 36},
-                    new Score {Player = "Halvard", Points = 69},
+                    //new Score {Player = "Dinesh", Points = 5},
+                    //new Score {Player = "Endre", Points = 5},
+                    //new Score {Player = "Endre O", Points = 9},
+                    //new Score {Player = "Geir", Points = 25},
+                    new Score {Player = "Fritjof", Points = 18},
+                    new Score {Player = "Halvard", Points = 28},
                     //new Score {Player = "Heather", Points = 1},
-                    //new Score {Player = "Håvard", Points = 37},
-                    //new Score {Player = "Jakob", Points = 1},
+                    new Score {Player = "Håvard", Points = 25},
+                    //new Score {Player = "Jakob", Points = 20},
                     //new Score {Player = "Jovanka", Points = 19},
                     //new Score {Player = "Julia", Points = 44},
                     //new Score {Player = "Jørn X", Points = 39},
@@ -118,20 +120,22 @@ namespace Test
                     //new Score {Player = "Kristian", Points = 22},
                     //new Score {Player = "Lars", Points = 16},
                     //new Score {Player = "Lars X", Points = 10},
-                    //new Score {Player = "Miriam", Points = 7},
+                    //new Score {Player = "Miriam", Points = 28},
                     //new Score {Player = "Monica", Points = 41},
                     //new Score {Player = "Mick", Points = 25},
-                    //new Score {Player = "Nikolaj", Points = 40},
+                    //new Score {Player = "Niklas", Points = 5},
+                    //new Score {Player = "Nikolaj", Points = 34},
                     //new Score {Player = "Nina", Points = 14},
                     //new Score {Player = "Ole Jonny", Points = 9},
-                    new Score {Player = "Rasmus", Points = 40},
-                    //new Score {Player = "Ruben", Points = 30},
+                    //new Score {Player = "Petter", Points = 66},
+                    //new Score {Player = "Rasmus", Points = 44},
+                    //new Score {Player = "Ruben", Points = 3},
                     //new Score {Player = "Stephanie", Points = 15},
                     //new Score {Player = "Sverre", Points = 17},
-                    //new Score {Player = "Tore", Points = 33},
-                    new Score {Player = "Torill", Points = 39},
-                    //new Score {Player = "Ørjan", Points = 6},
-                    //new Score {Player = "Øyvind", Points = 43},
+                    //new Score {Player = "Tore", Points = 3},
+                    //new Score {Player = "Torill", Points = 43},
+                    //new Score {Player = "Ørjan", Points = 3},
+                    new Score {Player = "Øyvind", Points = 29},
                     //new Score {Player = "Åse", Points = 13},
                 }
             };

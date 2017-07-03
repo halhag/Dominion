@@ -21,7 +21,7 @@ namespace Dominion.Controllers
             results = results.Where(x => x.GameType == GameType.Dominion).ToList();
             var calculator = new RatingCalculator();
             var calculatedRatings = calculator.Calculate(results);
-            var sortedResults = calculatedRatings.Where(x => x.LastPlayed > DateTime.Today.AddDays(-90)).OrderBy(x => x.Player).ToList();
+            var sortedResults = calculatedRatings.OrderBy(x => x.Player).ToList();
             foreach (var result in sortedResults)
             {
                 duelModel.PlayersFirst.Add(new SelectListItem { Text = result.Player, Value = result.Player });
